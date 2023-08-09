@@ -13,12 +13,23 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('name');
+            $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('imaage');
             $table->rememberToken();
             $table->timestamps();
+        });
+        Schema::create('follows', function (Blueprint $t){
+            $t->id();
+            $t->unsignedBigInteger('follower');
+            $t->unsignedBigInteger('followed');
+        });
+
+        Schema::table('follows', function (Blueprint $t){
+            $t->foreign('follower')->references('id')->on('users')->onDelete('cascade');
+            $t->foreign('followed')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
