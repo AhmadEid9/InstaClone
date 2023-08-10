@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from 'axios';
 import Input from "../../base/forms/input/input";
 import React from "react";
@@ -6,6 +6,7 @@ import React from "react";
 import "./style.css";
 
 const Register = () => {
+    const [button_click, setButton] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [password_confirm, setPasswordConfirm] = useState('');
@@ -34,15 +35,25 @@ const Register = () => {
     };
     
     const handlePasswordConfirmChange = (event) => {
-        setPassword(event.target.value);
+        setPasswordConfirm(event.target.value);
     };
 
     const handleRegister = async() => {
-       await axios.post("http://127.0.0.1:8000/api/guest/register", {name, username, email, password, image});
+        setButton(!!!button_click);
+        const response = await axios.post("http://127.0.0.1:8000/api/guest/register", {name, username, email, password, image}).catch((e) => console.log(e));
+
+        const u_name = response.data.name;
+        const u_username = response.data.username;
+        const useremail = response.data.email;
+        const u_image = response.data.image;
+        const token = response.data.token;
+
+        localStorage.setItem('user_name', u_name);
+        localStorage.setItem('username', u_username);
+        localStorage.setItem('user_email', useremail);
+        localStorage.setItem('user_image', u_image);
+        localStorage.setItem('user_token', token);
     };
-    useEffect(() => {
-        handleRegister
-    }, []);
     return (
         <div className="signin-form">
             <h1>Register</h1>
@@ -91,7 +102,7 @@ const Register = () => {
                 className="image-form"
             />
             <div>
-                <button onClick={handleRegister}>Register</button>
+                <button id="register" onClick={handleRegister}>Register</button>
             </div>
         </div>
     );

@@ -17,7 +17,7 @@ const Signin = () => {
     };
   
     const handleSignIn = async () => {
-      const response  = await axios.post("http://127.0.0.1:8000/api", { email, password });
+      const response  = await axios.post("http://127.0.0.1:8000/api", { email, password }).catch((e) => console.log(e));
 
       const name = response.data.name;
       const username = response.data.username;

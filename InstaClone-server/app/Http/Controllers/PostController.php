@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Posts;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +17,7 @@ class PostController extends Controller
             'image' => 'required|string'
         ]);
 
-        $post = new Posts;
+        $post = new Post;
         $post->title = $request->title;
         $post->description = $request->description;
         $post->user_id = $request->user_id;
@@ -32,5 +32,17 @@ class PostController extends Controller
             'message' => 'Post created successfully',
             'post' => $post,
         ], 201);
+    }
+
+    function getPosts($id = null){
+        if($id)
+            $post = Post::find($id);
+        else
+            $post = Post::all();
+
+        return response()->json([
+            "status" => "success", 
+            "data" => $post
+        ]);
     }
 }
