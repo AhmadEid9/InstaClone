@@ -9,10 +9,13 @@ const Navbar = () => {
         <div className="logo">
             <img src={address} alt="Logo" class="logo"/>
         </div>
+        <h3>
+          InstaClone
+        </h3>
         <ul className="nav-list">
-            <li><Link to="/">Contacts</Link></li>
-            <li><Link to="/">New</Link></li>
-            <li><Link to="/">Map</Link></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/signin">SignIn</Link></li>
+            <li><Link to="/register">Register</Link></li>
         </ul>
     </div>
   );

@@ -58,7 +58,7 @@ class AuthController extends Controller
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
-            'image' => 'required|string'
+            // 'image' => 'required|string'
         ]);
 
         $user = new User;
@@ -67,6 +67,7 @@ class AuthController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->image = $request->image;
+        $user->save();
 
         $token = Auth::login($user);
 

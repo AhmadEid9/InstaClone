@@ -1,0 +1,21 @@
+.signin-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 10px;
+    margin: 0;
+    padding: 1%;
+
+    width: 60%;
+
+    border: 1px solid gray;
+}
+.signin-form input{
+    width: 60%;
+}
+
+.image-form{
+    border: 1px solid gray;
+}
