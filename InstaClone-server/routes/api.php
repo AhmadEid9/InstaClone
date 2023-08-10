@@ -23,8 +23,9 @@ Route::group(["middleware" => "auth:api"], function () {
         Route::post("refresh", [AuthController::class, "refresh"]);
         
     });
-    Route::group(["refix" => "post"], function(){
-        Route::get("post/{id?}", [PostController::class, "getPosts"]);
+    Route::group(["prefix" => "post"], function(){
+        Route::get("/{id?}", [PostController::class, "getPosts"]);
+        Route::post("/create", [PostController::class, "createPost"]);
 
     });
 });

@@ -10,10 +10,9 @@ class PostController extends Controller
 {
     public function createPost(Request $request){
         $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'user_id' => 'required',
             'image' => 'required|string'
         ]);
 
@@ -22,6 +21,8 @@ class PostController extends Controller
         $post->description = $request->description;
         $post->user_id = $request->user_id;
         $post->image = $request->image;
+
+        $post->save();
 
         $token = Auth::login($post);
 

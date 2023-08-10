@@ -17,12 +17,14 @@ return new class extends Migration
             $table->string('description');
             $table->unsignedBigInteger('user_id');
             $table->string('image');
+            $table->timestamps();
         });
 
         Schema::create('likes', function (Blueprint $t){
             $t->id();
             $t->unsignedBigInteger('user_id');
             $t->unsignedBigInteger('post');
+            $t->timestamps();
         });
     }
 

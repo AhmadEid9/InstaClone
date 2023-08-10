@@ -17,18 +17,29 @@ const Signin = () => {
     };
   
     const handleSignIn = async () => {
-      const response  = await axios.post("http://127.0.0.1:8000/api", { email, password }).catch((e) => console.log(e));
+      const response  = await axios.post("http://127.0.0.1:8000/api/guest/login", { email, password }).catch((e) => console.log(e));
 
-      const name = response.data.name;
-      const username = response.data.username;
-      const useremail = response.data.email;
-      const image = response.data.image;
-      const token = response.data.token;
+      console.log(response.data.user);
 
+      const name = response.data.user.name;
+      const username = response.data.user.username;
+      const useremail = response.data.user.email;
+      const image = response.data.user.image;
+      const token = response.data.user.token;
+
+      console.log(name);
       localStorage.setItem('user_name', name);
+
+      console.log(username);
       localStorage.setItem('user_name', username);
+
+      console.log(useremail);
       localStorage.setItem('user_name', useremail);
+
+      console.log(image);
       localStorage.setItem('user_name', image);
+
+      console.log(token);
       localStorage.setItem('user_name', token);
 
 
